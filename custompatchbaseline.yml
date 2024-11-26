@@ -1,0 +1,226 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS Systems Manager Custom Patch Baseline Creation for Multiple Operating Systems
+
+Resources:
+  # Amazon Linux 2 Patch Baseline
+  CustomAmazonLinux2PatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomAmazonLinux2PatchBaseline"
+      OperatingSystem: "AMAZON_LINUX_2"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "AmazonLinux2"
+                    - "AmazonLinux2.0"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: " Custom Patch Baseline for Amazon Linux 2"
+    
+  # Ubuntu Patch Baseline
+  CustomUbuntuPatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomUbuntuPatchBaseline"
+      OperatingSystem: "UBUNTU"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "Ubuntu14.04"
+                    - "Ubuntu16.04"
+                    - "Ubuntu18.04"
+                    - "Ubuntu20.04"
+                    - "Ubuntu20.10"
+                    - "Ubuntu22.04"
+                    - "Ubuntu23.04"
+                    - "Ubuntu23.10"
+                    - "Ubuntu24.04"
+                    - "Ubuntu24.10"
+                - Key: SECTION
+                  Values:
+                    - libs
+                    - libdevel
+                    - doc
+                    - debug
+                    - translations
+                    - devel
+                    - admin
+                    - oldlibs
+                    - label
+                    - utils
+                    - net
+                    - web
+                    - gnome
+                    - perl
+                    - cli-mono
+                    - "universe/net"
+                - Key: PRIORITY
+                  Values:
+                    - Required
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: "Patch Baseline for Ubuntu"  
+
+  # CentOS Patch Baseline
+  CustomCentosPatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomCentosPatchBaseline"
+      OperatingSystem: "CENTOS"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "CentOS6.6"
+                    - "CentOS6.7"
+                    - "CentOS6.8"
+                    - "CentOS6.9"
+                    - "CentOS6.10"
+                    - "CentOS7.0"
+                    - "CentOS7.1"
+                    - "CentOS7.2"
+                    - "CentOS7.3"
+                    - "CentOS7.4"
+                    - "CentOS7.5"
+                    - "CentOS7.6"
+                    - "CentOS7.7"
+                    - "CentOS7.8"
+                    - "CentOS7.9"
+                    - "CentOS8.0"
+                    - "CentOS8.1"
+                    - "CentOS8.2"
+                    - "CentOS8.5"
+                    - "CentOS9"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: "Patch Baseline for CentOS"
+
+  # SUSE Patch Baseline
+  CustomSusePatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomSusePatchBaseline"
+      OperatingSystem: "SUSE"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "SUSE12.0"
+                    - "SUSE12.1"
+                    - "SUSE12.2"
+                    - "SUSE12.3"
+                    - "SUSE12.4"
+                    - "SUSE12.5"
+                    - "SUSE12.6"
+                    - "SUSE12.7"
+                    - "SUSE12.8"
+                    - "SUSE12.9"
+                    - "SUSE15.0"
+                    - "SUSE15.1"
+                    - "SUSE15.2"
+                    - "SUSE15.3"
+                    - "SUSE15.4"
+                    - "SUSE15.5"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Recommended
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: "Patch Baseline for SUSE"
+
+  # Windows Patch Baseline
+  CustomWindowsPatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomWindowsPatchBaseline"
+      OperatingSystem: "WINDOWS"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "Windows10"
+                    - "Windows10LTSB"
+                    - "Windows7"
+                    - "Windows8"
+                    - "Windows8.1"
+                    - "Windows8Embedded"
+                    - "WindowsServer2008"
+                    - "WindowsServer2008R2"
+                    - "WindowsServer2012"
+                    - "WindowsServer2012R2"
+                    - "WindowsServer2016"
+                    - "WindowsServer2019"
+                    - "WindowsServer2022"
+                    - "WindowsServer2025"
+                    - "MicrosoftDefenderAntivirus"
+                - Key: CLASSIFICATION
+                  Values:
+                    - CriticalUpdates
+                    - SecurityUpdates
+                - Key: MSRC_SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: "Patch Baseline for Windows"
+
+Outputs:
+  CustomAmazonLinux2PatchBaselineId:
+    Description: "The ID of the Amazon Linux 2 Patch Baseline"
+    Value: !Ref CustomAmazonLinux2PatchBaseline
+
+  CustomUbuntuPatchBaselineId:
+    Description: "The ID of the Ubuntu Patch Baseline"
+    Value: !Ref CustomUbuntuPatchBaseline
+
+  CustomCentosPatchBaselineId:
+    Description: "The ID of the CentOS Patch Baseline"
+    Value: !Ref CustomCentosPatchBaseline
+
+  CustomSusePatchBaselineId:
+    Description: "The ID of the SUSE Patch Baseline"
+    Value: !Ref CustomSusePatchBaseline
+
+  CustomWindowsPatchBaselineId:
+    Description: "The ID of the Windows Patch Baseline"
+    Value: !Ref CustomWindowsPatchBaseline
