@@ -1,7 +1,45 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: AWS Systems Manager Custom Patch Baseline Creation for Multiple Operating Systems
 
 Resources:
+  #Amazon Linux Patch Baseline
+  CustomAmazonLinuxPatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomAmazonLinuxPatchBaseline"
+      OperatingSystem: "AMAZON_LINUX"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "AmazonLinux2012.03"
+                    - "AmazonLinux2012.09"
+                    - "AmazonLinux2013.03"
+                    - "AmazonLinux2013.09"
+                    - "AmazonLinux2014.03"
+                    - "AmazonLinux2014.09"
+                    - "AmazonLinux2015.03"
+                    - "AmazonLinux2015.09"
+                    - "AmazonLinux2016.03"
+                    - "AmazonLinux2016.09"
+                    - "AmazonLinux2017.03"
+                    - "AmazonLinux2017.09"
+                    - "AmazonLinux2018.03"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: " Custom Patch Baseline for Amazon Linux"
+
   # Amazon Linux 2 Patch Baseline
   CustomAmazonLinux2PatchBaseline:
     Type: AWS::SSM::PatchBaseline
@@ -28,7 +66,59 @@ Resources:
             ComplianceLevel: HIGH
       ApprovedPatchesComplianceLevel: HIGH
       Description: " Custom Patch Baseline for Amazon Linux 2"
-    
+
+  # Amazon Linux 2022 Patch Baseline
+  CustomAmazonLinux2022PatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomAmazonLinux2022PatchBaseline"
+      OperatingSystem: "AMAZON_LINUX_2022"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "AmazonLinux2022"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: " Custom Patch Baseline for Amazon Linux 2022"
+
+  # Amazon Linux 2023 Patch Baseline
+  CustomAmazonLinux2023PatchBaseline:
+    Type: AWS::SSM::PatchBaseline
+    Properties:
+      Name: "CustomAmazonLinux2023PatchBaseline"
+      OperatingSystem: "AMAZON_LINUX_2023"
+      ApprovalRules:
+        PatchRules:
+          - PatchFilterGroup:
+              PatchFilters:
+                - Key: PRODUCT
+                  Values:
+                    - "AmazonLinux2023"
+                - Key: CLASSIFICATION
+                  Values:
+                    - Security
+                    - Bugfix
+                - Key: SEVERITY
+                  Values:
+                    - Critical
+                    - Important
+            ApproveAfterDays: 0
+            ComplianceLevel: HIGH
+      ApprovedPatchesComplianceLevel: HIGH
+      Description: " Custom Patch Baseline for Amazon Linux 2023"
+
   # Ubuntu Patch Baseline
   CustomUbuntuPatchBaseline:
     Type: AWS::SSM::PatchBaseline
@@ -76,7 +166,7 @@ Resources:
             ApproveAfterDays: 0
             ComplianceLevel: HIGH
       ApprovedPatchesComplianceLevel: HIGH
-      Description: "Patch Baseline for Ubuntu"  
+      Description: "Patch Baseline for Ubuntu"
 
   # CentOS Patch Baseline
   CustomCentosPatchBaseline:
@@ -205,9 +295,21 @@ Resources:
       Description: "Patch Baseline for Windows"
 
 Outputs:
+  CustomAmazonLinuxPatchBaselineId:
+    Description: "The ID of the Amazon Linux Patch Baseline"
+    Value: !Ref CustomAmazonLinuxPatchBaseline
+
   CustomAmazonLinux2PatchBaselineId:
     Description: "The ID of the Amazon Linux 2 Patch Baseline"
     Value: !Ref CustomAmazonLinux2PatchBaseline
+
+  CustomAmazonLinux2022PatchBaselineId:
+    Description: "The ID of the Amazon Linux 2022 Patch Baseline"
+    Value: !Ref CustomAmazonLinux2022PatchBaseline
+
+  CustomAmazonLinux2023PatchBaselineId:
+    Description: "The ID of the Amazon Linux 2023 Patch Baseline"
+    Value: !Ref CustomAmazonLinux2023PatchBaseline
 
   CustomUbuntuPatchBaselineId:
     Description: "The ID of the Ubuntu Patch Baseline"
